@@ -1,6 +1,7 @@
 @import "_variables.scss";
 @import "_mixins.scss";
 @import "_placeholders.scss";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900");
 
 body {
   margin: 0;
@@ -11,8 +12,13 @@ body {
 #root {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 50px;
   padding-top: 45px;
+  max-width: 80vw;
+  margin: 0 auto;
+  width: 100%;
 }
 
 nav {
@@ -20,7 +26,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   max-height: 68px;
-  padding: $padding-general;
+  width: 100%;
 
   ul {
     display: flex;
@@ -34,21 +40,52 @@ nav {
   font-weight: 500;
   color: #000;
 }
+
 .link:hover,
 .nav-active {
   text-decoration: underline;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 223px;
+  border-radius: 16px;
+  overflow: hidden;
+
+  .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(50%);
+  }
+
+  .banner-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    z-index: 1;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+      1px 1px 0 #000, -2px 0 0 #000, 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000;
+  }
 }
 
 .gallery {
   @extend %flex-center;
   justify-content: space-around;
   flex-wrap: wrap;
-  padding: $padding-general;
 }
 
 .card {
   background-color: $main-color;
+  width: 32%;
   color: #000;
+  border: 1px solid #000;
 }
 
 footer {

@@ -8,7 +8,7 @@ const App = () => {
           image="/images/banner-desktop.png"
           title={"Falaise en bord de mer"}
         />
-        <h1>Chez vous, partout et ailleurs</h1>
+        <h1 className="banner-title">Chez vous, partout et ailleurs</h1>
       </div>
       <Gallery />
     </>
