@@ -3,5 +3,55 @@
 @import "_placeholders.scss";
 
 body {
-  background-color: blue;
+  margin: 0;
+  font-family: "Montserrat";
+  font-size: 24px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding-top: 45px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 68px;
+  padding: $padding-general;
+
+  ul {
+    display: flex;
+    gap: 57px;
+    list-style: none;
+  }
+}
+
+.link {
+  text-decoration: none;
+  font-weight: 500;
+  color: #000;
+}
+.link:hover,
+.nav-active {
+  text-decoration: underline;
+}
+
+.gallery {
+  @extend %flex-center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: $padding-general;
+}
+
+.card {
+  background-color: $main-color;
+  color: #000;
+}
+
+footer {
+  color: #fff;
+  background-color: $footer-background;
 }
