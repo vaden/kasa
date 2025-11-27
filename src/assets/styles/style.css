@@ -53,6 +53,7 @@ nav ul {
   height: 223px;
   border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .banner .banner-img {
   width: 100%;
@@ -76,6 +77,8 @@ nav ul {
 .gallery {
   justify-content: space-around;
   flex-wrap: wrap;
+  background: rgb(246, 246, 246);
+  border-radius: 16px;
 }
 
 .card {
