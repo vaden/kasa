@@ -3,21 +3,27 @@
 @import "_placeholders.scss";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900");
 
+/* Général */
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Montserrat";
   font-size: 24px;
 }
 
-#root {
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 50px;
+  margin: 0 auto;
   padding-top: 45px;
   max-width: 80vw;
-  margin: 0 auto;
   width: 100%;
 }
 
@@ -47,11 +53,10 @@ nav {
 }
 
 .banner {
-  position: relative;
+  @extend %superposition;
   width: 100%;
   height: 223px;
-  border-radius: 16px;
-  overflow: hidden;
+  border-radius: $brad-el;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
   .banner-img {
@@ -76,22 +81,147 @@ nav {
   }
 }
 
+/* Home Page Gallery */
+
 .gallery {
   @extend %flex-center;
   justify-content: space-around;
   flex-wrap: wrap;
+  gap: 20px;
   background: rgba(246, 246, 246, 1);
-  border-radius: 16px;
+  border-radius: $brad-el;
+  padding: 50px;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .card {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: column;
+  @extend %superposition;
+  width: 340px;
+  max-width: 340px;
+  aspect-ratio: 1/1;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(10, 10, 10, 0) 42%,
+    rgba(4, 4, 4, 0.205) 99.99%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
   background-color: $main-color;
-  width: 32%;
-  color: #000;
-  border: 1px solid #000;
+  color: #fff;
+  border-radius: 10px;
+  transition: transform 300ms ease-in-out;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0) 42%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    z-index: 2;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-title {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 3;
+  font-weight: 700;
+  font-size: 18px;
+  margin: 0;
 }
 
 footer {
+  @extend %flex-center;
+  flex-direction: column;
+  margin: 50px 0 0 0;
+  padding: $padding-el;
   color: #fff;
   background-color: $footer-background;
+}
+
+.logo-footer {
+  padding: $padding-el;
+}
+
+.rights {
+  font-weight: 500;
+  padding: $padding-el;
+}
+
+/* Fiche */
+.fiche-presentation {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.fiche-title {
+  font-size: 36px;
+  font-weight: 500;
+  color: $main-color;
+  margin: 0;
+}
+
+.fiche-lieu {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+}
+
+.fiche-pills {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.pill {
+  @extend %flex-center;
+  width: 115px;
+  max-height: 25px;
+  background-color: $main-color;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: $brad-el;
+  padding: $padding-el;
+}
+
+.pill-name {
+  color: #fff;
+}
+
+.fiche-profile img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(196, 196, 196, 1);
 }
