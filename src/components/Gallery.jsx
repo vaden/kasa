@@ -1,16 +1,12 @@
 import Card from "./Card";
+import apartments from "../data.json";
 
 const Gallery = () => {
   return (
     <div className="gallery">
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      {apartments.map((apartment) => (
+        <Card key={apartment.id} apartment={apartment} />
+      ))}
     </div>
   );
 };

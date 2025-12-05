@@ -1,42 +1,64 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import Carousel from "../components/Carousel";
+import Pill from "../components/Pill";
+import Markdown from "../components/Markdown";
+import { useParams, Navigate } from "react-router";
+import apartments from "../data.json";
+
 const Fiche = () => {
+  const { id } = useParams();
+
+  const apartment = apartments.find((apt) => apt.id === id);
+
+  if (!apartment) {
+    return <Navigate to="*" replace />;
+  }
+
+  const rating = parseInt(apartment.rating);
   return (
     <>
-      <div className="carousel">
-        <img src="images/carrousel.png" alt="" />
-      </div>
+      <Carousel pictures={apartment.pictures} title={apartment.title} />
       <section className="fiche-presentation">
         <article className="fiche-title-pills">
-          <h1 className="fiche-title">Cozy loft on the Canal Saint-Martin</h1>
-          <span className="fiche-lieu">Paris, Île de France</span>
+          <div className="fiche-title">
+            <h1 className="title">{apartment.title}</h1>
+            <span className="lieu">{apartment.location}</span>
+          </div>
           <div className="fiche-pills">
-            <div className="pill">
-              <p className="pill-name">Cozy</p>
-            </div>
-            <div className="pill">
-              <p className="pill-name">Canal</p>
-            </div>
-            <div className="pill">
-              <p className="pill-name">Paris 10</p>
-            </div>
+            {apartment.tags.map((tag, index) => (
+              <Pill key={index} tag={tag} />
+            ))}
           </div>
         </article>
         <article className="fiche-profile">
-          <span className="profile-name">Alexandre Dumas</span>
-          <img
-            src="images/sansbarb.jpg"
-            alt="photo de profile de l'utilisateur"
-            className="profile-picture"
-          />
-          <span className="note"></span>
+          <div className="profile">
+            <span className="profile-name">{apartment.host.name}</span>
+            <img
+              src={apartment.host.picture}
+              alt={apartment.host.name}
+              className="profile-picture"
+            />
+          </div>
+          <div className="note">
+            {[...Array(5)].map((_, index) => (
+              <FontAwesomeIcon
+                key={index}
+                icon={faStar}
+                className={index < rating ? "star-filled" : "star-empty"}
+              />
+            ))}
+          </div>
         </article>
       </section>
       <section className="desc-equip">
-        <article className="fiche-desc">
-          <h2 className="desc-title">Description</h2>
-        </article>
-        <article className="fiche-equip">
-          <h2 className="equip-title">Équipements</h2>
-        </article>
+        <Markdown title={"Description"} content={apartment.description} />
+
+        <Markdown
+          title={"Équipements"}
+          content={apartment.equipments}
+          contentType="list"
+        />
       </section>
     </>
   );

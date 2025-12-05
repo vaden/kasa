@@ -3,7 +3,31 @@
 @import "_placeholders.scss";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900");
 
-/* Général */
+/* ========================================
+   GÉNÉRAL
+   ======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 * {
   box-sizing: border-box;
@@ -11,40 +35,96 @@
 
 body {
   margin: 0;
-  font-family: "Montserrat";
-  font-size: 24px;
+  font-family: "Montserrat", sans-serif;
+  font-size: $font-size-md;
+
+  @include tablet {
+    font-size: 20px;
+  }
+
+  @include mobile {
+    font-size: $font-size-sm;
+  }
+}
+
+.container-global {
+  @include flex-column;
+  margin: 0;
+  flex: 1;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: $spacing-lg;
+  flex: 1;
   margin: 0 auto;
   padding-top: 45px;
   max-width: 80vw;
   width: 100%;
+
+  @include tablet {
+    gap: $spacing-md;
+    padding-top: $spacing-md;
+    max-width: 90vw;
+  }
+
+  @include mobile {
+    gap: $spacing-sm;
+    padding-top: $spacing-sm;
+    max-width: 95vw;
+  }
 }
 
+/* ========================================
+   NAVIGATION
+   ======================================== */
+
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex-between;
   max-height: 68px;
   width: 100%;
 
   ul {
     display: flex;
     gap: 57px;
-    list-style: none;
+    @extend %list-reset;
+
+    @include tablet {
+      gap: $spacing-md;
+    }
+
+    @include mobile {
+      gap: 15px;
+      text-align: center;
+    }
+  }
+
+  @include mobile {
+    max-width: 335px;
+    gap: $spacing-sm;
+  }
+}
+
+.logo img {
+  max-width: 210.32px;
+
+  @include mobile {
+    max-width: 145px;
   }
 }
 
 .link {
   text-decoration: none;
+  line-height: $line-height-gen;
   font-weight: 500;
-  color: #000;
+  color: $text-color;
+  @include transition(color, opacity);
+
+  @include mobile {
+    font-size: 16px;
+  }
 }
 
 .link:hover,
@@ -52,45 +132,86 @@ nav {
   text-decoration: underline;
 }
 
+/* ========================================
+   BANNER
+   ======================================== */
+
 .banner {
   @extend %superposition;
   width: 100%;
   height: 223px;
   border-radius: $brad-el;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: $shadow-md;
+
+  @include tablet {
+    height: 180px;
+  }
+
+  @include mobile {
+    height: 111px;
+    max-width: 340px;
+  }
 
   .banner-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    @include img-responsive;
     filter: brightness(50%);
+    border-radius: $brad-el;
   }
 
   .banner-title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    @include absolute-center;
     margin: 0;
-    z-index: 1;
+    width: 100%;
+    z-index: $z-index-base;
+    font-size: $font-size-xl;
     font-weight: 700;
-    color: #fff;
+    line-height: $line-height-gen;
+    color: $text-light;
     white-space: nowrap;
+    text-align: center;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
       1px 1px 0 #000, -2px 0 0 #000, 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000;
+
+    @include tablet {
+      font-size: $font-size-lg;
+      white-space: normal;
+    }
+
+    @include mobile {
+      width: 100%;
+      font-size: $font-size-md;
+      white-space: normal;
+      line-height: 100%;
+      padding: $spacing-xs;
+      text-align: start;
+      padding: 0 100px 0 10px;
+    }
   }
 }
 
-/* Home Page Gallery */
+/* ========================================
+   HOME PAGE GALLERY
+   ======================================== */
 
 .gallery {
   @extend %flex-center;
-  justify-content: space-around;
   flex-wrap: wrap;
-  gap: 20px;
-  background: rgba(246, 246, 246, 1);
+  gap: $spacing-md;
+  background: $background-light;
   border-radius: $brad-el;
-  padding: 50px;
+  padding: $padding-lg;
+
+  @include tablet {
+    padding: $spacing-md $spacing-sm;
+    gap: $spacing-md;
+    justify-content: space-between;
+  }
+
+  @include mobile {
+    padding: 0 $spacing-xs;
+    gap: $spacing-sm;
+    background-color: $text-light;
+  }
 
   a {
     text-decoration: none;
@@ -98,44 +219,34 @@ nav {
 }
 
 .card {
-  display: flex;
+  @include flex-column;
   justify-content: space-between;
   align-items: start;
-  flex-direction: column;
   @extend %superposition;
   width: 340px;
   max-width: 340px;
+  min-height: 340px;
   aspect-ratio: 1/1;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(10, 10, 10, 0) 42%,
-    rgba(4, 4, 4, 0.205) 99.99%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+  @include card-gradient;
   background-color: $main-color;
-  color: #fff;
-  border-radius: 10px;
-  transition: transform 300ms ease-in-out;
+  color: $text-light;
+  border-radius: $brad-el;
+  @include transition(transform);
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(0, 0, 0, 0) 42%,
-      rgba(0, 0, 0, 0.5) 100%
-    );
-    z-index: 2;
+  @include tablet {
+    width: 320px;
+    min-height: 255px;
+  }
+
+  @include mobile {
   }
 
   &:hover {
     transform: scale(1.05);
+
+    @include mobile {
+      transform: none;
+    }
   }
 }
 
@@ -143,85 +254,514 @@ nav {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  z-index: $z-index-base;
+  @include img-responsive;
+  border-radius: $brad-el;
 }
 
 .card-title {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: $spacing-sm;
+  left: $spacing-sm;
   z-index: 3;
+  font-size: $font-size-sm;
+  line-height: $line-height-gen;
   font-weight: 700;
-  font-size: 18px;
   margin: 0;
+
+  @include mobile {
+    bottom: 15px;
+    left: 15px;
+  }
 }
+
+/* ========================================
+   FOOTER
+   ======================================== */
 
 footer {
   @extend %flex-center;
-  flex-direction: column;
-  margin: 50px 0 0 0;
+  @include flex-column;
+  flex-shrink: 0;
+  margin: $spacing-lg 0 0 0;
   padding: $padding-el;
-  color: #fff;
+  color: $text-light;
   background-color: $footer-background;
+
+  @include tablet {
+    margin: $spacing-md 0 0 0;
+  }
+
+  @include mobile {
+    margin: $spacing-sm 0 0 0;
+    padding: $spacing-sm $spacing-xs;
+  }
 }
 
 .logo-footer {
   padding: $padding-el;
+
+  @include mobile {
+    padding: $spacing-xs;
+
+    img {
+      max-width: 100px;
+    }
+  }
 }
 
 .rights {
+  line-height: $line-height-gen;
   font-weight: 500;
   padding: $padding-el;
+
+  @include mobile {
+    font-size: $font-size-xs;
+    padding: $spacing-xs;
+    text-align: center;
+  }
 }
 
-/* Fiche */
+/* ========================================
+   FICHE LOGEMENT
+   ======================================== */
+
+.carousel {
+  @extend %superposition;
+  width: 100%;
+  height: 415px;
+  border-radius: $brad-el;
+  overflow: hidden;
+
+  @include tablet {
+    height: 340px;
+  }
+
+  @include mobile {
+    max-width: 335px;
+  }
+}
+
+.carousel-image {
+  @include img-responsive;
+  border-radius: $brad-el;
+}
+
+/* .carousel img {
+  @include tablet {
+    max-width: 729px;
+    height: 350px;
+  }
+  @include mobile {
+    max-width: 335px;
+    height: 255px;
+  }
+} */
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: $text-light;
+  font-size: 48px;
+  cursor: pointer;
+  z-index: $z-index-base;
+  @include transition(opacity, transform);
+  padding: $spacing-sm;
+
+  &:hover {
+    opacity: 0.8;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  @include tablet {
+    font-size: 36px;
+  }
+
+  @include mobile {
+    font-size: 24px;
+  }
+
+  svg {
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.3));
+  }
+}
+
+.carousel-arrow-left {
+  left: $spacing-md;
+
+  @include mobile {
+    left: $spacing-sm;
+  }
+}
+
+.carousel-arrow-right {
+  right: $spacing-md;
+
+  @include mobile {
+    right: $spacing-sm;
+  }
+}
+
+.carousel-counter {
+  position: absolute;
+  bottom: $spacing-md;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $text-light;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $brad-sm;
+  z-index: $z-index-base;
+
+  @include mobile {
+    font-size: 16px;
+    bottom: $spacing-sm;
+    padding: 5px $spacing-xs;
+  }
+}
+
 .fiche-presentation {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  @include flex-between;
+  align-items: end;
+  width: 100%;
+  gap: $spacing-sm;
+}
+
+.fiche-title-pills {
+  @include flex-column;
+  gap: $spacing-md;
+
+  @include mobile {
+    gap: $spacing-sm;
+  }
 }
 
 .fiche-title {
-  font-size: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.title {
+  font-size: $font-size-lg;
+  line-height: $line-height-gen;
   font-weight: 500;
   color: $main-color;
   margin: 0;
+
+  @include tablet {
+    font-size: 28px;
+  }
+
+  @include mobile {
+    font-size: $font-size-sm;
+  }
 }
 
-.fiche-lieu {
-  font-size: 18px;
+.lieu {
+  font-size: $font-size-sm;
+  line-height: $line-height-gen;
   font-weight: 500;
-  color: rgba(0, 0, 0, 1);
+  color: $text-color;
+
+  @include mobile {
+    font-size: $font-size-xs;
+  }
 }
 
 .fiche-pills {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+
+  @include mobile {
+    gap: $spacing-xs;
+  }
 }
 
 .pill {
   @extend %flex-center;
-  width: 115px;
+  min-width: 115px;
+  width: auto;
   max-height: 25px;
   background-color: $main-color;
-  font-size: 14px;
+  font-size: $font-size-xs;
   font-weight: 700;
   text-align: center;
   border-radius: $brad-el;
   padding: $padding-el;
+  white-space: nowrap;
+
+  @include mobile {
+    min-width: 80px;
+    font-size: 10px;
+    padding: 8px 12px;
+  }
 }
 
 .pill-name {
-  color: #fff;
+  color: $text-light;
+  line-height: $line-height-gen;
+  text-overflow: ellipsis;
 }
 
-.fiche-profile img {
+.fiche-profile {
+  @extend %flex-center;
+  @include flex-column;
+  gap: $spacing-sm;
+
+  @include tablet {
+    align-items: end;
+  }
+
+  @include mobile {
+    flex-direction: row;
+  }
+}
+
+.profile {
+  @extend %flex-center;
+  gap: $spacing-xs;
+
+  @include mobile {
+    order: 2;
+  }
+}
+
+.profile-name {
+  width: 93px;
+  color: $main-color;
+  font-size: $font-size-sm;
+  line-height: $line-height-gen;
+  text-align: right;
+  font-weight: 500;
+
+  @include tablet {
+    text-align: left;
+  }
+
+  @include mobile {
+    font-size: 16px;
+    width: auto;
+  }
+}
+
+.profile-picture {
   width: 64px;
   height: 64px;
-  border-radius: 50%;
+  border-radius: $brad-full;
   background: rgba(196, 196, 196, 1);
+
+  @include mobile {
+    width: 48px;
+    height: 48px;
+    order: 2;
+  }
+}
+
+.note {
+  @extend %flex-center;
+  gap: 5px;
+
+  @include tablet {
+    justify-content: flex-start;
+  }
+
+  @include mobile {
+    order: 1;
+  }
+}
+
+.note .star-filled {
+  width: $font-size-lg;
+  font-size: $font-size-lg;
+  color: $main-color;
+
+  @include mobile {
+    width: $font-size-md;
+    font-size: $font-size-md;
+  }
+}
+
+.star-empty {
+  width: $font-size-lg;
+  font-size: $font-size-lg;
+  color: $star-not-selected;
+  @include mobile {
+    width: $font-size-md;
+    font-size: $font-size-md;
+  }
+}
+
+.desc-equip {
+  @include flex-between;
+  align-items: normal;
+  gap: $spacing-lg;
+
+  @include tablet {
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+}
+
+.desc-equip-art {
+  flex: 1;
+}
+
+.markdown {
+  @include flex-between;
+  height: 52px;
+  background-color: $main-color;
+  border-radius: $brad-el;
+  color: $text-light;
+  font-weight: 700;
+  font-size: $font-size-sm;
+  line-height: $line-height-gen;
+  padding: $spacing-xs $spacing-sm $spacing-xs $spacing-xs;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($main-color, 5%);
+  }
+
+  @include mobile {
+    border-radius: $brad-sm;
+    font-size: $font-size-xs;
+    height: auto;
+    max-height: 30px;
+    padding: $spacing-xs;
+  }
+}
+
+.markdown-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease-in-out;
+  svg {
+    width: 32px;
+    height: 32px;
+    @include transition(transform);
+
+    @include mobile {
+      width: $font-size-md;
+      height: $font-size-md;
+    }
+  }
+}
+
+.markdown-arrow.markdown-active {
+  transform: rotate(-180deg);
+}
+
+.markdown-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out;
+}
+
+.markdown-open {
+  max-height: 1000px;
+  transition: max-height 0.4s ease-in-out;
+}
+
+.markdown-child {
+  background: $background-light;
+  border-radius: $brad-el $brad-sm;
+  font-size: $font-size-sm;
+  font-weight: 400;
+  line-height: $line-height-gen;
+  margin: 0;
+  padding: $spacing-sm;
+  flex: 1;
+
+  @include mobile {
+    font-size: 12px;
+    padding: 15px;
+    border-radius: 5px;
+  }
+}
+
+.markdown-child-item {
+  list-style: none;
+}
+
+.visible {
+  display: block;
+  opacity: 1;
+}
+
+/* ========================================
+   404 NOT FOUND
+   ======================================== */
+
+.notfound-container {
+  @extend %flex-center;
+  @include flex-column;
+  gap: $spacing-sm;
+  color: $main-color;
+}
+
+.notfound-title {
+  margin: 0;
+  @include responsive-font(100px, $font-size-xxl);
+  font-weight: 700;
+  line-height: $line-height-tight;
+  text-align: center;
+  vertical-align: middle;
+
+  @include tablet {
+    font-size: clamp(80px, 15vw, 200px);
+  }
+
+  @include mobile {
+    font-size: clamp(60px, 25vw, 150px);
+  }
+}
+
+.notfound-text {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: 500;
+  line-height: $line-height-gen;
+  vertical-align: bottom;
+  text-align: center;
+
+  @include tablet {
+    font-size: 28px;
+  }
+
+  @include mobile {
+    font-size: $spacing-sm;
+    padding: 0 $spacing-sm;
+  }
+}
+
+.notfound-btn {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  line-height: $line-height-gen;
+  color: $text-color;
+  text-decoration: underline;
+  @include transition(opacity);
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  @include mobile {
+    font-size: 16px;
+  }
 }

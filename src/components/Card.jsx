@@ -1,15 +1,15 @@
 import { Link } from "react-router";
 
-const Card = () => {
+const Card = ({ apartment }) => {
   return (
-    <Link to={"/fiche-logement"}>
+    <Link to={`/fiche-logement/${apartment.id}`}>
       <div className="card">
         <img
           className="card-image"
-          src="/images/banner-desktop.png"
-          alt="visuel de la location"
+          src={apartment.cover}
+          alt={apartment.title}
         />
-        <h2 className="card-title">Titre de la location</h2>
+        <h2 className="card-title">{apartment.title}</h2>
       </div>
     </Link>
   );
