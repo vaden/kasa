@@ -261,7 +261,6 @@ nav ul {
   max-width: 340px;
   min-height: 340px;
   aspect-ratio: 1/1;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(10, 10, 10, 0) 42%, rgba(4, 4, 4, 0.205) 99.99%, rgba(0, 0, 0, 0.5) 100%);
   background-color: #ff6060;
   color: #fff;
   border-radius: 10px;
@@ -272,6 +271,17 @@ nav ul {
     width: 320px;
     min-height: 255px;
   }
+}
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(10, 10, 10, 0) 42%, rgba(4, 4, 4, 0.205) 99.99%, rgba(0, 0, 0, 0.5) 100%);
+  z-index: 2;
+  pointer-events: none;
 }
 .card:hover {
   transform: scale(1.05);

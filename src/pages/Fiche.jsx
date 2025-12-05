@@ -4,15 +4,20 @@ import Carousel from "../components/Carousel";
 import Pill from "../components/Pill";
 import Markdown from "../components/Markdown";
 import { useParams, Navigate } from "react-router";
-import apartments from "../data.json";
+import { useFetchApartments } from "../hooks/useFetchApartments";
 
 const Fiche = () => {
   const { id } = useParams();
+  const { apartments, loading, error } = useFetchApartments();
 
   const apartment = apartments.find((apt) => apt.id === id);
 
-  if (!apartment) {
-    return <Navigate to="*" replace />;
+  if (loading) {
+    return <div className="loading">Chargement...</div>;
+  }
+
+  if (error || !apartment) {
+    return <Navigate to="/404" replace />;
   }
 
   const rating = parseInt(apartment.rating);
