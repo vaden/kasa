@@ -238,7 +238,7 @@ nav ul {
   .gallery {
     padding: 30px 20px;
     gap: 30px;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 }
 @media (max-width: 767px) {
@@ -248,8 +248,15 @@ nav ul {
     background-color: #fff;
   }
 }
+
 .gallery a {
+  border-radius: 10px;
   text-decoration: none;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .gallery a {
+    max-width: 47.6%;
+  }
 }
 
 .card {
@@ -268,8 +275,8 @@ nav ul {
 }
 @media (min-width: 768px) and (max-width: 1024px) {
   .card {
-    width: 320px;
-    min-height: 255px;
+    width: fit-content;
+    min-height: 310px;
   }
 }
 .card::after {
@@ -279,6 +286,7 @@ nav ul {
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 10px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(10, 10, 10, 0) 42%, rgba(4, 4, 4, 0.205) 99.99%, rgba(0, 0, 0, 0.5) 100%);
   z-index: 2;
   pointer-events: none;
@@ -335,11 +343,13 @@ footer {
 @media (min-width: 768px) and (max-width: 1024px) {
   footer {
     margin: 30px 0 0 0;
+    flex-grow: 2;
   }
 }
 @media (max-width: 767px) {
   footer {
     margin: 20px 0 0 0;
+    flex-grow: 2;
     padding: 20px 10px;
   }
 }
@@ -383,11 +393,6 @@ footer {
     height: 340px;
   }
 }
-@media (max-width: 767px) {
-  .carousel {
-    max-width: 335px;
-  }
-}
 
 .carousel-image {
   width: 100%;
@@ -396,16 +401,6 @@ footer {
   border-radius: 10px;
 }
 
-/* .carousel img {
-  @include tablet {
-    max-width: 729px;
-    height: 350px;
-  }
-  @include mobile {
-    max-width: 335px;
-    height: 255px;
-  }
-} */
 .carousel-arrow {
   position: absolute;
   top: 50%;
@@ -483,6 +478,11 @@ footer {
   width: 100%;
   gap: 20px;
 }
+@media (max-width: 767px) {
+  .fiche-presentation {
+    flex-direction: column;
+  }
+}
 
 .fiche-title-pills {
   display: flex;
@@ -491,6 +491,7 @@ footer {
 }
 @media (max-width: 767px) {
   .fiche-title-pills {
+    min-width: 95vw;
     gap: 20px;
   }
 }
@@ -516,6 +517,7 @@ footer {
 }
 @media (max-width: 767px) {
   .title {
+    max-width: 80%;
     font-size: 18px;
   }
 }
@@ -583,6 +585,8 @@ footer {
 @media (max-width: 767px) {
   .fiche-profile {
     flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
   }
 }
 
@@ -640,6 +644,7 @@ footer {
 @media (max-width: 767px) {
   .note {
     order: 1;
+    gap: 10px;
   }
 }
 

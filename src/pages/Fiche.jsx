@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Carousel from "../components/Carousel";
 import Pill from "../components/Pill";
-import Markdown from "../components/Markdown";
+import Dropdown from "../components/Dropdown";
 import { useParams, Navigate } from "react-router";
 import { useFetchApartments } from "../hooks/useFetchApartments";
 
@@ -57,9 +57,9 @@ const Fiche = () => {
         </article>
       </section>
       <section className="desc-equip">
-        <Markdown title={"Description"} content={apartment.description} />
+        <Dropdown title={"Description"} content={apartment.description} />
 
-        <Markdown
+        <Dropdown
           title={"Équipements"}
           content={apartment.equipments}
           contentType="list"

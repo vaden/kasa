@@ -204,7 +204,7 @@ nav {
   @include tablet {
     padding: $spacing-md $spacing-sm;
     gap: $spacing-md;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 
   @include mobile {
@@ -212,9 +212,14 @@ nav {
     gap: $spacing-sm;
     background-color: $text-light;
   }
+}
 
-  a {
-    text-decoration: none;
+.gallery a {
+  border-radius: 10px;
+  text-decoration: none;
+
+  @include tablet {
+    max-width: 47.6%;
   }
 }
 
@@ -233,8 +238,8 @@ nav {
   @include transition(transform);
 
   @include tablet {
-    width: 320px;
-    min-height: 255px;
+    width: fit-content;
+    min-height: 310px;
   }
 
   &::after {
@@ -244,6 +249,7 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
+    border-radius: 10px;
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0) 0%,
@@ -304,10 +310,12 @@ footer {
 
   @include tablet {
     margin: $spacing-md 0 0 0;
+    flex-grow: 2;
   }
 
   @include mobile {
     margin: $spacing-sm 0 0 0;
+    flex-grow: 2;
     padding: $spacing-sm $spacing-xs;
   }
 }
@@ -350,27 +358,12 @@ footer {
   @include tablet {
     height: 340px;
   }
-
-  @include mobile {
-    max-width: 335px;
-  }
 }
 
 .carousel-image {
   @include img-responsive;
   border-radius: $brad-el;
 }
-
-/* .carousel img {
-  @include tablet {
-    max-width: 729px;
-    height: 350px;
-  }
-  @include mobile {
-    max-width: 335px;
-    height: 255px;
-  }
-} */
 
 .carousel-arrow {
   position: absolute;
@@ -443,6 +436,10 @@ footer {
   align-items: end;
   width: 100%;
   gap: $spacing-sm;
+
+  @include mobile {
+    flex-direction: column;
+  }
 }
 
 .fiche-title-pills {
@@ -450,6 +447,7 @@ footer {
   gap: $spacing-md;
 
   @include mobile {
+    min-width: 95vw;
     gap: $spacing-sm;
   }
 }
@@ -473,6 +471,7 @@ footer {
   }
 
   @include mobile {
+    max-width: 80%;
     font-size: $font-size-sm;
   }
 }
@@ -536,6 +535,8 @@ footer {
 
   @include mobile {
     flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
   }
 }
 
@@ -589,6 +590,7 @@ footer {
 
   @include mobile {
     order: 1;
+    gap: 10px;
   }
 }
 
