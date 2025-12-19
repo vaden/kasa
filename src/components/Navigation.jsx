@@ -4,7 +4,9 @@ const Navigation = () => {
   return (
     <nav>
       <div className="logo">
-        <img src="/images/logo-nav.svg" alt="logo de Kasa" />
+        <NavLink to={"/"}>
+          <img src="/images/logo-nav.svg" alt="logo de Kasa" />
+        </NavLink>
       </div>
       <ul>
         <li>
